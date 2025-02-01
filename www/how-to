@@ -1,0 +1,12 @@
+#Webpage Search Script (PHP) - V1.0
+
+##How-To
+
+This webpage search script works on top of the HamDB script. 
+  Instructions to get that portion of the script up and running: https://blog.radioartisan.com/fcc-callsign-database-script/
+
+Once you have the HamDB working, download the Webpage Search Script in your web server folder and update the php.db file with your database credintials you wish to use to access the HamDB fcc_amateur database.
+
+You will need to add a VIEW   
+
+
