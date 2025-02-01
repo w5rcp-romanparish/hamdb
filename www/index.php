@@ -36,18 +36,16 @@ if (isset($_POST['search'])) {
             max-height: 400px; /* Adjust as needed */
             overflow-y: auto;
         }
-        .table-container thead {
-            position: sticky;
-            top: 0;
-            z-index: 1;
-            background-color: #fff; /* Make header background white */
-        }
+         /* Reduce the font size for the table */
+         .table td, .table th {
+            font-size: 0.75rem; /* Set the font size to the smallest readable size */
+        }       
     </style>
 </head>
 <body>
-
     <div class="container mt-5">
-        <h1 class="text-center">Search for Callsign</h1>
+        <p class="text-center">HamDB web script.<br><a href="https://github.com/w5rcp-romanparish/hamdb">https://github.com/w5rcp-romanparish/hamdb</a></p>
+        <h2 class="text-center">Search for Callsign</h2>
 
         <!-- Search Form -->
         <form method="POST" action="index.php" class="mb-4 d-flex justify-content-center">
@@ -55,16 +53,19 @@ if (isset($_POST['search'])) {
                 <label for="callsign" class="sr-only">Enter Callsign:</label>
                 <input type="text" id="callsign" name="callsign" class="form-control form-control-sm" maxlength="6" required placeholder="Enter Callsign">
             </div>
-            <button type="submit" name="search" class="btn btn-primary btn-sm">Search</button>
+            <button type="submit" name="search" class="btn btn-dark btn-sm">Search</button>
         </form>
-	<br>
+
         <?php if ($result): ?>
             <!-- Display the result if available -->
+            <br>
+            <hr>
+            <br>
             <h2 class="text-center mb-4">Result for Callsign: <?php echo htmlspecialchars($result['callsign']); ?></h2>
             
             <div class="table-container">
-                <table class="table table-bordered table-striped">
-                    <thead>
+                <table class="table table-bordered">
+                    <thead class="table-dark">
                         <tr>
                             <th>FCC ID</th>
                             <th>Class</th>
@@ -111,3 +112,5 @@ if (isset($_POST['search'])) {
 
 </body>
 </html>
+
+
