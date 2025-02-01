@@ -3,10 +3,33 @@
 ##How-To
 
 This webpage search script works on top of the HamDB script. 
-  Instructions to get that portion of the script up and running: https://blog.radioartisan.com/fcc-callsign-database-script/
+  Instructions to get HamDB up and running: https://blog.radioartisan.com/fcc-callsign-database-script/
 
-Once you have the HamDB working, download the Webpage Search Script in your web server folder and update the php.db file with your database credintials you wish to use to access the HamDB fcc_amateur database.
+Once you have the HamDB working, download the Webpage Search Script to your web server folder and update the php.db file with your database credintials you wish to use to access the HamDB fcc_amateur database.
 
-You will need to add a VIEW   
+To simplify this script, you will also need to add a VIEW within the fcc_amateur database with the following query:
 
+SQL VIEW CREATE:
+
+USE fcc_amateur;
+CREATE VIEW hamdb AS
+SELECT 
+    `fcc_amateur`.`en`.`fccid` AS `fccid`,
+    `fcc_amateur`.`en`.`callsign` AS `callsign`,
+    `fcc_amateur`.`am`.`class` AS `class`,
+    `fcc_amateur`.`en`.`first` AS `first`,
+    `fcc_amateur`.`en`.`middle` AS `middle`,
+    `fcc_amateur`.`en`.`last` AS `last`,
+    `fcc_amateur`.`en`.`address1` AS `address1`,
+    `fcc_amateur`.`en`.`city` AS `city`,
+    `fcc_amateur`.`en`.`state` AS `state`,
+    `fcc_amateur`.`en`.`zip` AS `zip`,
+    DATE_FORMAT(`fcc_amateur`.`hd`.`grant_date`, '%m/%d/%Y') AS `grant_date`,
+    DATE_FORMAT(`fcc_amateur`.`hd`.`expired_data`, '%m/%d/%Y') AS `expired_data`
+FROM 
+    ((`fcc_amateur`.`en`
+    JOIN `fcc_amateur`.`hd` ON `fcc_amateur`.`en`.`fccid` = `fcc_amateur`.`hd`.`fccid`)
+    JOIN `fcc_amateur`.`am` ON `fcc_amateur`.`en`.`fccid` = `fcc_amateur`.`am`.`fccid`))
+WHERE 
+    `fcc_amateur`.`hd`.`cancellation_date` = '0000-00-00 00:00:00';
 
