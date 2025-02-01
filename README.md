@@ -5,6 +5,6 @@ Project Site:
 
 https://blog.radioartisan.com/fcc-callsign-database-script/
 
-# Webpage Search Script (PHP) - V1.0
+# Webpage Search Script (PHP) - v1.0
 Created a simple PHP search page to work with hamdb script. Folder (www) includes the index.php, db.php, and how-to files.
 
